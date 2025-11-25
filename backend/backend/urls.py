@@ -15,14 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from workshop.views import create_client, get_clients, delete_client, update_client, get_client_with_vehicules
+from django.urls import path, include
+from workshop.views import ClientViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'clients', ClientViewSet, basename='clients')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('clients/', get_clients, name="get_clients"),          # GET
-    path('clients/', create_client, name="create_client"),      # POST
-    path('clients/<int:pk>/', update_client, name="update_client"),  # PUT
-    path('clients/<int:pk>/', delete_client, name="delete_client"),   # DELETE
-    path('clients/<int:pk>/', get_client_with_vehicules, name="get_client_with_vehicules") #GET CLIENTS WITH VEHICULES
+    path('admin/', admin.site.urls), 
+    path('', include(router.urls)),   
 ]
