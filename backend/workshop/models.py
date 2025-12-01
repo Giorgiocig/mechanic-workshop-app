@@ -28,7 +28,7 @@ class Vehicule(models.Model):
         ('H', 'Ibrido'),
     ]
 
-    owner = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='veicoli')
+    owner = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='vehicules')
     number_plate = models.CharField(max_length=10, unique=True)
     brand = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
