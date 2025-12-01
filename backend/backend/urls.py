@@ -16,13 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from workshop.views import ClientViewSet
+from workshop.views import ClientViewSet, VehiculeViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework_nested import routers
 
+# Main router
 router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='clients')
+
+
+# Nested router for vehicules under clients
+clients_router = routers.NestedDefaultRouter(router, r'clients', lookup='client')
+clients_router.register(r'vehicules', VehiculeViewSet, basename='client-vehicules')
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', include(router.urls)),   
+    path('', include(clients_router.urls)),
 ]
