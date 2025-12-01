@@ -2,3 +2,4 @@ django
 psycopg[binary]
 djangorestframework
 django-cors-headers
+drf-nested-routers
