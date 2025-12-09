@@ -23,6 +23,7 @@ from rest_framework_nested import routers
 # Main router
 router = DefaultRouter()
 router.register(r'clients', ClientViewSet, basename='clients')
+router.register(r'vehicules', VehiculeViewSet, basename='vehicules')
 
 
 # Nested router for vehicules under clients
